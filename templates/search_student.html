@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Search Student · EduManage</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+<div class="app-shell">
+
+  <aside class="sidebar" id="sidebar">
+    <button class="sidebar-close-btn" id="sidebarCloseBtn" aria-label="Close menu"><i class="fa-solid fa-xmark"></i></button>
+    <a href="/" class="sidebar-brand">
+      <span class="brand-mark"><i class="fa-solid fa-graduation-cap"></i></span>
+      EduManage
+    </a>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section-label">Overview</div>
+      <a href="/" class="sidebar-link"><i class="fa-solid fa-grid-2"></i> Dashboard</a>
+      <div class="sidebar-section-label">Students</div>
+      <a href="/view_student" class="sidebar-link"><i class="fa-solid fa-users"></i> All Students</a>
+      <a href="/add_student" class="sidebar-link"><i class="fa-solid fa-user-plus"></i> Add Student</a>
+      <a href="/search_student" class="sidebar-link active"><i class="fa-solid fa-magnifying-glass"></i> Search Student</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <span class="avatar-chip tone-2">KS</span>
+        <div><div class="sidebar-user-name">Karandeep Singh</div><div class="sidebar-user-role">Admin</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+  <div class="main-col">
+    <header class="topbar">
+      <button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+      <div class="topbar-title">
+        <h1>Search Student</h1>
+        <p>Find a student by name, roll number or email</p>
+      </div>
+      <div class="topbar-actions ms-auto">
+        <button class="icon-btn" aria-label="Notifications"><i class="fa-regular fa-bell"></i><span class="dot"></span></button>
+        <div class="topbar-user">
+          <span class="avatar-chip tone-2 size-sm">KS</span>
+          <div class="d-none d-sm-block"><div class="user-name">Karandeep Singh</div><div class="user-role">karandeep@edumanage.io</div></div>
+        </div>
+      </div>
+    </header>
+
+    <main class="page-content">
+      <div class="row justify-content-center">
+        <div class="col-xl-9">
+
+          <div class="card-surface card-body-pad text-center mb-4">
+            
+            <h2 class="mt-3 mb-1" style="font-weight:800;font-size:1.3rem;">Find a Student</h2>
+            <p class="text-secondary mb-3" style="color:var(--text-secondary)">Search across the entire student database in real time.</p>
+            <form action="/search_student" method="get">
+    <div class="row g-2 justify-content-center">
+
+        <div class="col-12 col-md-7">
+            <div class="position-relative">
+
+                <i class="fa-solid fa-magnifying-glass position-absolute"
+                   style="left:16px;top:50%;transform:translateY(-50%);
+                          color:var(--text-muted);"></i>
+
+                <input
+                    type="text"
+                    name="query"
+                    class="form-control form-control-lg"
+                    style="padding-left:2.8rem;border-radius:999px;"
+                    placeholder="Search by name, roll no, email or class..."
+                    value="{{ query if query else '' }}"
+                >
+
+            </div>
+        </div>
+
+        <div class="col-12 col-md-2">
+            <button class="btn btn-brand btn-lg w-100">
+                Search
+            </button>
+        </div>
+
+    </div>
+</form>
+          </div>
+{% if students %}
+
+<div class="row g-3">
+
+{% for student in students %}
+
+<div class="col-md-6">
+
+    <a href="/view_student/{{ student.id }}"
+       class="text-decoration-none">
+
+        <div class="card-surface search-result-card card-body-pad d-flex gap-3 align-items-center">
+
+            <span class="avatar-chip tone-1">
+                {{ student.name[:2]|upper }}
+            </span>
+
+            <div class="flex-fill">
+
+                <div class="fw-bold">
+                    {{ student.name }}
+                </div>
+
+                <div class="text-secondary">
+
+                    {{ student.rollno }}
+                    ·
+                    {{ student.class_name }}
+                    -
+                    {{ student.section }}
+
+                </div>
+
+            </div>
+
+            {% if student.status == "Active" %}
+
+                <span class="status-pill active">
+
+            {% elif student.status == "Inactive" %}
+
+                <span class="status-pill inactive">
+
+            {% else %}
+
+                <span class="status-pill pending">
+
+            {% endif %}
+
+                {{ student.status }}
+
+            </span>
+
+        </div>
+
+    </a>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% elif query %}
+
+<div class="empty-state">
+    <div class="empty-icon">
+        <i class="fa-solid fa-user-slash"></i>
+    </div>
+
+    <h3>No student found</h3>
+
+    <p>
+        No student matches "{{ query }}".
+    </p>
+</div>
+
+{% endif %}
+
+   
+          
+        </div>
+      </div>
+    </main>
+
+    <footer class="app-footer">
+      <span>© 2026 EduManage. Built for academic institutions.</span>
+      <span>Frontend UI · <a href="#">Documentation</a> · <a href="#">Support</a></span>
+    </footer>
+  </div>
+</div>
+
+<div class="toast-stack" id="toastStack"></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/static/js/script.js"></script>
+</body>
+</html>

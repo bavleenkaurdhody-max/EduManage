@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard · EduManage</title>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<!-- Bootstrap 5 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<!-- App styles -->
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar" id="sidebar">
+    <button class="sidebar-close-btn" id="sidebarCloseBtn" aria-label="Close menu"><i class="fa-solid fa-xmark"></i></button>
+    <a href="/" class="sidebar-brand">
+      <span class="brand-mark"><i class="fa-solid fa-graduation-cap"></i></span>
+      EduManage
+    </a>
+
+    <nav class="sidebar-nav">
+      <div class="sidebar-section-label">Overview</div>
+      <a href="/" class="sidebar-link active"><i class="fa-solid fa-grid-2"></i> Dashboard</a>
+
+      <div class="sidebar-section-label">Students</div>
+      <a href="/view_student" class="sidebar-link"><i class="fa-solid fa-users"></i> All Students</a>
+      <a href="/add_student" class="sidebar-link"><i class="fa-solid fa-user-plus"></i> Add Student</a>
+      <a href="/search_student" class="sidebar-link"><i class="fa-solid fa-magnifying-glass"></i> Search Student</a>
+
+
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <span class="avatar-chip tone-2">KS</span>
+        <div>
+          <div class="sidebar-user-name">Karandeep Singh</div>
+          <div class="sidebar-user-role">Admin</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+  <!-- ============ MAIN COLUMN ============ -->
+  <div class="main-col">
+
+    <!-- ============ TOPBAR ============ -->
+    <header class="topbar">
+      <button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+      <div class="topbar-title">
+        <h1>Dashboard</h1>
+        <p>Tuesday, 28 July 2026</p>
+      </div>
+      <div class="topbar-search">
+        
+      </div>
+      <div class="topbar-actions">
+        <button class="icon-btn" aria-label="Notifications"><i class="fa-regular fa-bell"></i><span class="dot"></span></button>
+        <button class="icon-btn" aria-label="Help"><i class="fa-regular fa-circle-question"></i></button>
+        <div class="topbar-user">
+          <span class="avatar-chip tone-2 size-sm">KS</span>
+          <div class="d-none d-sm-block">
+            <div class="user-name">Karandeep Singh</div>
+            <div class="user-role">karandeep@edumanage.io</div>
+          </div>
+          <i class="fa-solid fa-chevron-down ms-1" style="font-size:.7rem;color:var(--text-muted)"></i>
+        </div>
+      </div>
+    </header>
+
+    <!-- ============ PAGE CONTENT ============ -->
+    <main class="page-content">
+
+      <!-- Welcome -->
+      <div class="d-flex flex-wrap justify-content-between align-items-end mb-4 gap-3">
+        <div>
+          <h2 class="fw-800 mb-1" style="font-size:1.5rem;font-weight:800;">Welcome back, Admin 👋</h2>
+          <p class="text-secondary mb-0" style="color:var(--text-secondary)">Here's what's happening across your campus today.</p>
+        </div>
+        <a href="/add_student" class="btn btn-brand"><i class="fa-solid fa-user-plus"></i> Add Student</a>
+      </div>
+
+      <!-- Stat cards -->
+      <div class="row g-3 mb-4">
+        <div class="col-6 col-lg-3">
+          <div class="card-surface hoverable stat-card h-100">
+            <div class="stat-icon tone-teal"><i class="fa-solid fa-users"></i></div>
+            <div>
+              <div class="stat-value">{{ total_students }}</div>
+              <div class="stat-label">Total Students</div>
+            </div>
+            <span class="stat-trend up"><i class="fa-solid fa-arrow-up"></i> Registered Students</span>
+          </div>
+        </div>
+        <div class="col-6 col-lg-3">
+          <div class="card-surface hoverable stat-card h-100">
+            <div class="stat-icon tone-indigo"><i class="fa-solid fa-chalkboard"></i></div>
+            <div>
+              <div class="stat-value">{{ active_students }}</div>
+              <div class="stat-label">Active Courses</div>
+            </div>
+            <span class="stat-trend up"><i class="fa-solid fa-arrow-up"></i> Currently Active</span>
+          </div>
+        </div>
+        <div class="col-6 col-lg-3">
+          <div class="card-surface hoverable stat-card h-100">
+            <div class="stat-icon tone-amber"><i class="fa-solid fa-user-clock"></i></div>
+            <div>
+              <div class="stat-value">{{ inactive_students }}</div>
+              <div class="stat-label">Inactive Students</div>
+            </div>
+            <span class="stat-trend up"><i class="fa-solid fa-arrow-up"></i> Currently Inactive</span>
+          </div>
+        </div>
+        <div class="col-6 col-lg-3">
+          <div class="card-surface hoverable stat-card h-100">
+            <div class="stat-icon tone-rose"><i class="fa-solid fa-chart-line"></i></div>
+            <div>
+              <div class="stat-value">{{ total_classes }}</div>
+              <div class="stat-label">Classes </div>
+            </div>
+            <span class="stat-trend down"><i class="fa-solid fa-arrow-down"></i>Available Classes</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-3">
+        <!-- Recent students -->
+        <div class="col-lg-7">
+          <div class="card-surface h-100">
+            <div class="card-head">
+              <div>
+                <h3>Recently Added Students</h3>
+                <p>Latest entries in the system</p>
+              </div>
+              <a href="/view_student" class="btn btn-outline-soft btn-sm">View all <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+            <div class="card-body-pad pt-3">
+              <div class="table-responsive">
+                <table class="table-modern">
+                  <thead>
+                    <tr><th>Student</th><th>Class</th><th>Status</th></tr>
+                  </thead>
+                  <tbody>
+
+{% for student in recent_students %}
+
+<tr>
+
+    <td>
+        <div class="student-cell">
+
+            <span class="avatar-chip tone-1 size-sm">
+                {{ student.name[:2]|upper }}
+            </span>
+
+            <div>
+                <div class="name">
+                    {{ student.name }}
+                </div>
+
+                <div class="sub">
+                    {{ student.rollno }}
+                </div>
+            </div>
+
+        </div>
+    </td>
+
+    <td>
+        Class {{ student.class_name }} - {{ student.section }}
+    </td>
+
+    <td>
+
+        {% if student.status == "Active" %}
+            <span class="status-pill active">
+        {% elif student.status == "Inactive" %}
+            <span class="status-pill inactive">
+        {% else %}
+            <span class="status-pill pending">
+        {% endif %}
+
+            {{ student.status }}
+
+        </span>
+
+    </td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Department distribution + quick actions -->
+        <div class="col-lg-5">
+          
+
+          <div class="card-surface">
+            <div class="card-head"><div><h3>Quick Actions</h3></div></div>
+            <div class="card-body-pad pt-3 d-flex flex-column gap-2">
+              <a href="/add_student" class="btn btn-outline-soft w-100 justify-content-start"><i class="fa-solid fa-user-plus"></i> Add a new student</a>
+              <a href="/search_student" class="btn btn-outline-soft w-100 justify-content-start"><i class="fa-solid fa-magnifying-glass"></i> Search student records</a>
+              <a href="/view_student" class="btn btn-outline-soft w-100 justify-content-start"><i class="fa-solid fa-table-list"></i> View all students</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <footer class="app-footer">
+      <span>© 2026 EduManage. Built for academic institutions.</span>
+      <span>Frontend UI · <a href="#">Documentation</a> · <a href="#">Support</a></span>
+    </footer>
+  </div>
+</div>
+
+<div class="toast-stack" id="toastStack"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/static/js/script.js"></script>
+</body>
+</html>

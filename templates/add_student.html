@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Student · EduManage</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/static/css/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body>
+
+<div class="app-shell">
+
+  <aside class="sidebar" id="sidebar">
+    <button class="sidebar-close-btn" id="sidebarCloseBtn" aria-label="Close menu"><i class="fa-solid fa-xmark"></i></button>
+    <a href="/" class="sidebar-brand">
+      <span class="brand-mark"><i class="fa-solid fa-graduation-cap"></i></span>
+      EduManage
+    </a>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section-label">Overview</div>
+      <a href="/" class="sidebar-link"><i class="fa-solid fa-grid-2"></i> Dashboard</a>
+      <div class="sidebar-section-label">Students</div>
+      <a href="/view_student" class="sidebar-link"><i class="fa-solid fa-users"></i> All Students</a>
+      <a href="/add_student" class="sidebar-link active"><i class="fa-solid fa-user-plus"></i> Add Student</a>
+      <a href="/search_student" class="sidebar-link"><i class="fa-solid fa-magnifying-glass"></i> Search Student</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <span class="avatar-chip tone-2">KS</span>
+        <div><div class="sidebar-user-name">Karandeep Singh</div><div class="sidebar-user-role">Admin</div></div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+  <div class="main-col">
+    <header class="topbar">
+      <button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+      <div class="topbar-title">
+        <h1>Add Student</h1>
+        <p>Create a new student record</p>
+      </div>
+      <div class="topbar-actions ms-auto">
+        <button class="icon-btn" aria-label="Notifications"><i class="fa-regular fa-bell"></i><span class="dot"></span></button>
+        <div class="topbar-user">
+          <span class="avatar-chip tone-2 size-sm">KS</span>
+          <div class="d-none d-sm-block"><div class="user-name">Karandeep Singh</div><div class="user-role">karandeep@edumanage.io</div></div>
+        </div>
+      </div>
+    </header>
+
+    <main class="page-content">
+      <div class="row justify-content-center">
+        <div class="col-xl-9">
+
+         
+
+          <form
+          action="/add_student"
+          method="post"
+          class="card-surface card-body-pad">
+
+            <div class="form-section-title"><i class="fa-solid fa-id-card"></i> Personal Details</div>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label-modern">Full Name <span class="req">*</span></label>
+                <input type="text" class="form-control" name="name" placeholder="e.g. Aarav Rao" required>
+                <div class="invalid-feedback">Please enter the student's full name.</div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label-modern">Roll Number <span class="req">*</span></label>
+                <input type="text" class="form-control" name="rollno" placeholder="e.g. 100" required>
+                <div class="invalid-feedback">Please enter a roll number.</div>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label-modern">Gender <span class="req">*</span></label>
+                <select class="form-select" name="gender" required>
+                  <option value="" selected disabled>Select gender</option>
+                  <option>Male</option>
+                  <option>Female</option>
+                  <option>Other</option>
+                </select>
+                <div class="invalid-feedback">Please select a gender.</div>
+              </div>
+            </div>
+
+            <div class="form-section-title"><i class="fa-solid fa-address-book"></i> Contact Details</div>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label-modern">Email Address <span class="req">*</span></label>
+                <input type="email" class="form-control" name="email" placeholder="student@edumanage.io" required>
+                <div class="invalid-feedback">Please enter a valid email address.</div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label-modern">Phone Number <span class="req">*</span></label>
+                <input type="tel" class="form-control" name="phone" placeholder="+91 90000 00000" required>
+                <div class="invalid-feedback">Please enter a phone number.</div>
+              </div>
+              
+            </div>
+
+            <div class="form-section-title"><i class="fa-solid fa-graduation-cap"></i> Academic Details</div>
+            <div class="row g-3">
+              
+              <div class="col-md-4">
+                <label class="form-label-modern">Class / Grade <span class="req">*</span></label>
+                <select class="form-select" name="class_name" required>
+                  <option value="" selected disabled>Select Class</option>
+                  <option value="Class 1">Class 1</option>
+<option value="Class 2">Class 2</option>
+<option value="Class 3">Class 3</option>
+<option value="Class 4">Class 4</option>
+<option value="Class 5">Class 5</option>
+<option value="Class 6">Class 6</option>
+<option value="Class 7">Class 7</option>
+<option value="Class 8">Class 8</option>
+<option value="Class 9">Class 9</option>
+<option value="Class 10">Class 10</option>
+<option value="Class 11">Class 11</option>
+<option value="Class 12">Class 12</option>
+                </select>
+                <div class="invalid-feedback">Please select a grade.</div>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label-modern">Section</label>
+                <select class="form-select" name="section">
+                  <option value="" selected disabled>Select section</option>
+                  <option>A</option><option>B</option><option>C</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label-modern">Admission Date</label>
+                <input
+    type="text"
+    id="admission_date"
+    class="form-control"
+    name="admission_date"
+    placeholder="DD/MM/YYYY">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label-modern">Status</label>
+                <select class="form-select" name="status">
+                  <option>Active</option>
+                  <option>Pending</option>
+                  <option>Inactive</option>
+                </select>
+              </div>
+            </div>
+
+            
+
+            
+            <hr class="divider-soft">
+            <div class="d-flex gap-2 justify-content-end flex-wrap">
+              <a href="/view_student" class="btn btn-outline-soft"><i class="fa-solid fa-xmark"></i> Cancel</a>
+              <button type="reset" class="btn btn-ghost">Clear Form</button>
+              <button type="submit" class="btn btn-brand"><i class="fa-solid fa-check"></i> Add Student</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <footer class="app-footer">
+      <span>© 2026 EduManage. Built for academic institutions.</span>
+      <span>Frontend UI · <a href="#">Documentation</a> · <a href="#">Support</a></span>
+    </footer>
+  </div>
+</div>
+
+<div class="toast-stack" id="toastStack"></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/static/js/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+flatpickr("#admission_date", {
+    dateFormat: "d/m/Y",
+    allowInput: true
+});
+</script>
+</body>
+</html>
